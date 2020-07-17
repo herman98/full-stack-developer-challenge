@@ -1,17 +1,18 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 
-import mysql.connector
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.20.0.2:3306/sourcesage_db'
 
-# config = {
-#         'user': 'root',
-#         'password': 'root',
-#         'host': 'db',
-#         'port': '3306',
-#         'database': 'knights'
-#     }
-# connection = mysql.connector.connect(**config)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
-from app import views
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
+
+from app import views, models
