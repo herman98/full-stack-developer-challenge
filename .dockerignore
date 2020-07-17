@@ -8,8 +8,10 @@
 
 # Environment (contains sensitive data)
 .env
+__pycache__/
 
 # Files not required for production
+.editorconfig
 Dockerfile
 docker-compose.yml
 README.md
