@@ -1,5 +1,5 @@
-CREATE DATABASE db_sourcesage;
-use db_sourcesage;
+-- CREATE DATABASE sourcesage_db;
+use sourcesage_db;
 
 CREATE TABLE favorite_colors (
   name VARCHAR(20),
