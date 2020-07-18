@@ -1,0 +1,1063 @@
+{
+	"info": {
+		"_postman_id": "fb937388-3a41-4d25-8284-56fe0dfe1171",
+		"name": "flask-fullstack-challange",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get product by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/product/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cars  3\",\n  \"description\": \"Cars products category Update 3\",\n  \"logo_id\": \"0\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/product/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Shoes product category\",\n  \"logo_id\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						},
+						"description": "Save building information to DB and elasticsearch.\nBehind this API will trigger:\n1. sync region: use reverse geocoding to translate building latlon into region information then save those (name, lat, lon) into db\n2. save to elasticsearch."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "226",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Sep 2017 07:30:31 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:5000/api/v1/cms/buildings/336",
+									"name": "Location",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.11.10 Python/2.7.13",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"address\": \"localhost\", \n  \"deleted_at\": null, \n  \"id\": 336, \n  \"lat\": -6.1195212, \n  \"lon\": 106.7613774, \n  \"name\": \"postman 3\", \n  \"picture\": \"https://s3-ap-southeast-1.amazonaws.com/xwork-bucket/buildings/images/336/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/product/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Variant",
+			"item": [
+				{
+					"name": "Get variant by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/variant/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variant",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new variant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"will be deleted\",\n  \"size\": \"34 delete\",\n  \"color\": \"deleted\",\n  \"product_id\": \"5\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/variant",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variant"
+							]
+						},
+						"description": "Save building information to DB and elasticsearch.\nBehind this API will trigger:\n1. sync region: use reverse geocoding to translate building latlon into region information then save those (name, lat, lon) into db\n2. save to elasticsearch."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "226",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Sep 2017 07:30:31 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:5000/api/v1/cms/buildings/336",
+									"name": "Location",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.11.10 Python/2.7.13",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"address\": \"localhost\", \n  \"deleted_at\": null, \n  \"id\": 336, \n  \"lat\": -6.1195212, \n  \"lon\": 106.7613774, \n  \"name\": \"postman 3\", \n  \"picture\": \"https://s3-ap-southeast-1.amazonaws.com/xwork-bucket/buildings/images/336/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update variant",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"color\": \"white with red line update 3\",\n  \"name\": \"Nike Running Update 3\",\n  \"product_id\": \"5\",\n  \"size\": \"34 hi 3\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/variant/9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variant",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete variant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/variant/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variant",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "Get image by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/image/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"image",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"/home/bakwan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/image",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"image"
+							]
+						},
+						"description": "Save building information to DB and elasticsearch.\nBehind this API will trigger:\n1. sync region: use reverse geocoding to translate building latlon into region information then save those (name, lat, lon) into db\n2. save to elasticsearch."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "226",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Sep 2017 07:30:31 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:5000/api/v1/cms/buildings/336",
+									"name": "Location",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.11.10 Python/2.7.13",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"address\": \"localhost\", \n  \"deleted_at\": null, \n  \"id\": 336, \n  \"lat\": -6.1195212, \n  \"lon\": 106.7613774, \n  \"name\": \"postman 3\", \n  \"picture\": \"https://s3-ap-southeast-1.amazonaws.com/xwork-bucket/buildings/images/336/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update image",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"/home/huhuhuhu update 1\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/image/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"image",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/image/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"image",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Query",
+			"item": [
+				{
+					"name": "Add new variants by product ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"name\": \"new variant 1\",\n    \"size\": \"size var 1\",\n    \"color\": \"color var 1\"\n  },\n  {\n    \"name\": \"new variant 2\",\n    \"size\": \"size var 2\",\n    \"color\": \"color var 2\"\n  },\n  {\n    \"name\": \"new variant 3\",\n    \"size\": \"size var 3\",\n    \"color\": \"color var 3\"\n  }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/variant/5/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variant",
+								"5",
+								"add"
+							]
+						},
+						"description": "Save building information to DB and elasticsearch.\nBehind this API will trigger:\n1. sync region: use reverse geocoding to translate building latlon into region information then save those (name, lat, lon) into db\n2. save to elasticsearch."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "226",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Sep 2017 07:30:31 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:5000/api/v1/cms/buildings/336",
+									"name": "Location",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.11.10 Python/2.7.13",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"address\": \"localhost\", \n  \"deleted_at\": null, \n  \"id\": 336, \n  \"lat\": -6.1195212, \n  \"lon\": 106.7613774, \n  \"name\": \"postman 3\", \n  \"picture\": \"https://s3-ap-southeast-1.amazonaws.com/xwork-bucket/buildings/images/336/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Link images by product ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"image_id\": \"1\"\n  },\n  {\n    \"image_id\": \"2\"\n  },\n  {\n    \"image_id\": \"3\"\n  },\n  {\n    \"image_id\": \"4\"\n  },\n  {\n    \"image_id\": \"7\"\n  },\n  {\n    \"image_id\": \"6\"\n  }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/product/5/images",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"5",
+								"images"
+							]
+						},
+						"description": "Save building information to DB and elasticsearch.\nBehind this API will trigger:\n1. sync region: use reverse geocoding to translate building latlon into region information then save those (name, lat, lon) into db\n2. save to elasticsearch."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "226",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Sep 2017 07:30:31 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:5000/api/v1/cms/buildings/336",
+									"name": "Location",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.11.10 Python/2.7.13",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"address\": \"localhost\", \n  \"deleted_at\": null, \n  \"id\": 336, \n  \"lat\": -6.1195212, \n  \"lon\": 106.7613774, \n  \"name\": \"postman 3\", \n  \"picture\": \"https://s3-ap-southeast-1.amazonaws.com/xwork-bucket/buildings/images/336/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Link images by variant ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"image_id\": \"1\"\n  },\n  {\n    \"image_id\": \"2\"\n  },\n  {\n    \"image_id\": \"3\"\n  },\n  {\n    \"image_id\": \"4\"\n  },\n  {\n    \"image_id\": \"7\"\n  },\n  {\n    \"image_id\": \"6\"\n  }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/variant/2/images",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variant",
+								"2",
+								"images"
+							]
+						},
+						"description": "Save building information to DB and elasticsearch.\nBehind this API will trigger:\n1. sync region: use reverse geocoding to translate building latlon into region information then save those (name, lat, lon) into db\n2. save to elasticsearch."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "226",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Sep 2017 07:30:31 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:5000/api/v1/cms/buildings/336",
+									"name": "Location",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/0.11.10 Python/2.7.13",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"address\": \"localhost\", \n  \"deleted_at\": null, \n  \"id\": 336, \n  \"lat\": -6.1195212, \n  \"lon\": 106.7613774, \n  \"name\": \"postman 3\", \n  \"picture\": \"https://s3-ap-southeast-1.amazonaws.com/xwork-bucket/buildings/images/336/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Search all variants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/variants?page=1&per_page=10&search_list=['name', 'size', 'color']",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variants"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "search_list",
+									"value": "['name', 'size', 'color']",
+									"description": "['name', 'size', 'color']"
+								},
+								{
+									"key": "keyword",
+									"value": "mountain",
+									"disabled": true
+								},
+								{
+									"key": "delete_status",
+									"value": "false",
+									"description": "false or true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search all images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/images?page=1&per_page=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"images"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "search_list",
+									"value": "['url']",
+									"description": "['url']",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "nana",
+									"disabled": true
+								},
+								{
+									"key": "delete_status",
+									"value": "true",
+									"description": "false or true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/products?page=1&per_page=10&search_list=['name', 'description']",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "search_list",
+									"value": "['name', 'description']",
+									"description": "['name', 'description']"
+								},
+								{
+									"key": "keyword",
+									"value": "seiko",
+									"disabled": true
+								},
+								{
+									"key": "delete_status",
+									"value": "false",
+									"description": "false or true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get variant by product ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/variants/5/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"variants",
+								"5",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
