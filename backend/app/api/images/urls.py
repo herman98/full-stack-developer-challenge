@@ -10,7 +10,10 @@ app_bp.add_url_rule("/image", 'add_image', ImageController().post, methods=['POS
 
 #link image with product and variant
 app_bp.add_url_rule("/product/<int:product_id>/images", 'add_product_images', ImageController().post_product_images, methods=['POST'])
+app_bp.add_url_rule("/product/<int:product_id>/images/remove", 'remove_product_images', ImageController().post_product_image_remove, methods=['POST'])
+
 app_bp.add_url_rule("/variant/<int:variant_id>/images", 'add_variant_images', ImageController().post_variant_images, methods=['POST'])
+app_bp.add_url_rule("/variant/<int:variant_id>/images/remove", 'remove_variant_images', ImageController().post_variant_image_remove, methods=['POST'])
 
 
 

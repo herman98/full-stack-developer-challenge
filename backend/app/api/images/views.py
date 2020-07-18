@@ -76,30 +76,110 @@ class ImageController(FlaResource):
                 data=response_data,
                 message="OK")
     
-    # def get_by_product(self, product_id):
-    #     print("ImageController::GET->get_by_product")
-
-    #     # get product
-    #     product = Product.query.get(product_id)
-    #     if not product:
-    #         return self.response_v2(status=404, error="Product Not Found")
+    def post_product_image_remove(self, product_id):
+        print("ImageController::POST->post_product_image_remove")
         
-    #     #query get images
-    #     images = Image.query.filter(Image.product == product)
-    #     image_s = ImageSerializer(many=True).dump(images)
+        # Get data
+        data = json.loads(request.data)
+        print(f'data1: {data}')
 
-    #     # Cover image
-    #     # image_logo = get_logo_image(images['spaces'])
+        if len(data) <= 1:
+            return self.response_v2(status=404, error="Image List IDs Not Found")
 
-    #     response_data = {
-    #         "image": image_s
-    #         # "cover_image": cover_image
-    #     }
+        # get product
+        product = Product.query.get(product_id)
+        if not product:
+            return self.response_v2(status=404, error="Product Not Found")
+        
+        image_ids = [item['image_id'] for item in data]
+        print(f'image_ids: {image_ids}')
 
-    #     return self.response_v2(status=200, 
-    #             data=response_data,
-    #             message="OK")
+        counting = 0
+        images_obj = Image.query.filter(Image.id.in_(image_ids)).all()
+        for image_item in images_obj:
+            #validate if image id exists for specifik product_id
+            x = Product.query.filter(Product.images.any(id=image_item.id)).count()
+            if x >= 1:
+                product.images.remove(image_item)
+                counting = counting + 1
+
+        # Add Link product images
+        if counting == 0:
+            return self.response_v2(status=404, error="No Product Link Image Not Found")
+
+        try:
+            db.session.add(product)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return self.response_v2(status=400,
+                                    message="Failed to remove multi image data",
+                                    reason=e)
+
+        product_s = ProductSerializer(exclude=('variants','images',)).dump(product)
+        image_s = ImageSerializer(many=True).dump(images_obj)
+
+        response_data = {
+            "product": product_s,
+            "image": image_s
+        }
+
+        return self.response_v2(status=200, 
+                data=response_data, 
+                message="Success remove produk images list")
     
+    def post_variant_image_remove(self, variant_id):
+        print("ImageController::POST->post_variant_image_remove")
+        
+        # Get data
+        data = json.loads(request.data)
+        print(f'data1: {data}')
+
+        if len(data) <= 1:
+            return self.response_v2(status=404, error="Image List IDs Not Found")
+
+        # get variant
+        variant = Variant.query.get(variant_id)
+        if not variant:
+            return self.response_v2(status=404, error="Variant Not Found")
+        
+        image_ids = [item['image_id'] for item in data]
+        print(f'image_ids: {image_ids}')
+
+        counting = 0
+        images_obj = Image.query.filter(Image.id.in_(image_ids)).all()
+        for image_item in images_obj:
+            #validate if image id exists for specifik variant_id
+            x = Variant.query.filter(Variant.images.any(id=image_item.id)).count()
+            if x >= 1:
+                variant.images.remove(image_item)
+                counting = counting + 1
+
+        # Add Link variant images
+        if counting == 0:
+            return self.response_v2(status=404, error="No Variant Link Image Not Found")
+
+        try:
+            db.session.add(variant)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return self.response_v2(status=400,
+                                    message="Failed to remove multi image data",
+                                    reason=e)
+
+        variant_s = VariantSerializer(exclude=('images',)).dump(variant)
+        image_s = ImageSerializer(many=True).dump(images_obj)
+
+        response_data = {
+            "variant": variant_s,
+            "image": image_s
+        }
+
+        return self.response_v2(status=200, 
+                data=response_data, 
+                message="Success remove variant images list")
+
     def post(self):
         print("ImageController::POST")
 
@@ -169,7 +249,6 @@ class ImageController(FlaResource):
         for image_item in images_obj:
             #validate if image id exists for specifik product_id
             x = Product.query.filter(Product.images.any(id=image_item.id)).count()
-            print(f'x.count: {x}')
             if x == 0:
                 product.images.append(image_item)
                 counting = counting + 1
@@ -187,7 +266,7 @@ class ImageController(FlaResource):
                                     message="Failed to add multi image data",
                                     reason=e)
 
-        product_s = ProductSerializer(exclude=('variants',)).dump(product)
+        product_s = ProductSerializer(exclude=('variants','images',)).dump(product)
         image_s = ImageSerializer(many=True).dump(images_obj)
 
         response_data = {
@@ -197,7 +276,7 @@ class ImageController(FlaResource):
 
         return self.response_v2(status=200, 
                 data=response_data, 
-                message="Success add image")
+                message="Success link produk images list")
 
     def post_variant_images(self, variant_id):
         print("ImageController::POST->post_variant_images")
@@ -222,7 +301,6 @@ class ImageController(FlaResource):
         for image_item in images_obj:
             #validate if image id exists for specifik variant_id
             x = Variant.query.filter(Variant.images.any(id=image_item.id)).count()
-            print(f'x.count: {x}')
             if x == 0:
                 variant.images.append(image_item)
                 counting = counting + 1
@@ -250,7 +328,7 @@ class ImageController(FlaResource):
 
         return self.response_v2(status=200, 
                 data=response_data, 
-                message="Success add image")
+                message="Success add variant image list")
 
     def put(self, image_id):
         print("ImageController::PUT")

@@ -3,7 +3,7 @@ from marshmallow import validate, validates, ValidationError
 
 from app.common import FlaMarshmallow
 
-# from app.api.products.schemas import ProductSerializer
+from app.api.images.schemas import ImageSerializer
 
 # from .models import Image
 
@@ -36,7 +36,7 @@ class VariantSerializer(FlaMarshmallow):
     color = fields.String()
     product_id = fields.Integer()
 
-    # product = fields.Nested(ProductSerializer)
+    images = fields.Nested(ImageSerializer, many=True)
 
     @validates('name')
     def validate_name(self, value):
