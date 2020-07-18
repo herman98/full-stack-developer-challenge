@@ -15,6 +15,7 @@ RUN set -e; \
 		libc-dev \
 		linux-headers \
 	; \
+	apk add --no-cache bash mariadb-dev mariadb-client mariadb-libs python3-dev build-base; \
 	pip install -r requirements.txt; \
 	apk del .build-deps;
 
