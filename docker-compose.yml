@@ -1,23 +1,5 @@
 version: '3.3'
 services:
-  backend:
-    build: ./backend
-    container_name: backend_flask
-    restart: always
-    environment:
-      - APP_NAME=BackendFlaskApp
-    # ports:
-    #   - 8080:8080
-    expose: 
-      - 8080
-    links:
-      - db
-  nginx:
-    build: ./nginx
-    container_name: nginx
-    restart: always
-    ports:
-      - "80:80"
   db:
     image: mysql:5.7
     container_name: mysql_db
@@ -33,6 +15,25 @@ services:
       - ./db:/docker-entrypoint-initdb.d/:ro
     # volumes:
     #   - my-db:/var/lib/mysql
-    
+  backend:
+    build: ./backend
+    container_name: backend_flask
+    restart: always
+    environment:
+      - APP_NAME=BackendFlaskApp
+    # ports:
+    #   - 8080:8080
+    expose: 
+      - 8080
+    links:
+      - db
+    depends_on: 
+      - db
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
 # volumes:
 #   my-db:
