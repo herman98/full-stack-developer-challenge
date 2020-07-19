@@ -91,6 +91,7 @@ class Product(BaseModelTimestamp):
     description = Column('Descriptions', Text)
     logo_id = Column(Integer, ForeignKey('images.id'),
         nullable=True)
+    logo = db.relationship("Image", backref="products_logo", lazy=True)
 
     # variants = relationship("Variant", back_populates="products", uselist=False)
     images = db.relationship('Image', secondary=product_images, lazy='dynamic',

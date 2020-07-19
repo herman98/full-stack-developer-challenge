@@ -13,7 +13,6 @@ services:
       MYSQL_ROOT_PASSWORD: 'root_password'
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
-    # volumes:
     #   - my-db:/var/lib/mysql
   backend:
     build: ./backend
@@ -29,6 +28,8 @@ services:
       - db
     depends_on: 
       - db
+    command: 
+      - db_migrate.sh
   nginx:
     build: ./nginx
     container_name: nginx
