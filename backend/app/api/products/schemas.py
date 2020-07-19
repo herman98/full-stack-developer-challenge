@@ -32,6 +32,7 @@ class ProductSerializer(FlaMarshmallow):
     name = fields.String(required=True)
     description = fields.String()
     logo_id = fields.Integer()
+    logo = fields.Nested(ImageSerializer, many=False)
 
     variants = fields.Nested(VariantSerializer, many=True)
     images = fields.Nested(ImageSerializer, many=True)
