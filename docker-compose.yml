@@ -29,7 +29,7 @@ services:
     depends_on: 
       - db
     # command: 
-    #   - db_migrate.sh
+    #  - db_migrate.sh
   nginx:
     build: ./nginx
     container_name: nginx
