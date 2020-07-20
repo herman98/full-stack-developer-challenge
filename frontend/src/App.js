@@ -7,6 +7,7 @@ import { DesktopOutlined, FileOutlined } from '@ant-design/icons'
 import Home from './pages/Home/index.jsx'
 import ProductForm from './pages/Product/Form'
 import VariantForm from './pages/Variant/Form'
+import ImageLogoForm from './pages/ImageLogo/Form'
 import VariantList from './pages/Variant/list/List'
 
 const { Header, Content, Footer, Sider } = Layout
@@ -31,14 +32,19 @@ function App() {
             <div className="logo" style={logoStyle}><h1 className="logo-text">Home</h1></div>
           </Link>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <SubMenu key="sub1" icon={<DesktopOutlined />} title="Product">
+            <SubMenu key="sub1" icon={<DesktopOutlined />} title="Products">
               <Menu.Item key="1">
                 <Link to="/product/form">Insert</Link>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<FileOutlined />} title="Variant">
-              <Menu.Item key="3">
+            <SubMenu key="sub2" icon={<FileOutlined />} title="Variants">
+              <Menu.Item key="2">
                 <Link to="/variant/form">Insert</Link>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub3" icon={<FileOutlined />} title="Images">
+              <Menu.Item key="3">
+                <Link to="/image_logo/form">Insert</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>
@@ -57,6 +63,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route path="/product/form" component={ProductForm} />
                 <Route path="/variant/form" component={VariantForm} />
+                <Route path="/image_logo/form" component={ImageLogoForm} />
                 <Route path="/variant/list" component={VariantList} />
                 <Route render={() => <h1>404 Not Found</h1>} />
               </Switch>
