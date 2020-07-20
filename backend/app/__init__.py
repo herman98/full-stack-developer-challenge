@@ -15,8 +15,8 @@ app = Flask(__name__,
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.20.0.3:3306/sourcesage_db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@db:3306/sourcesage_db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.20.0.3:3306/sourcesage_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@db:3306/sourcesage_db'
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
