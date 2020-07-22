@@ -1,10 +1,13 @@
 from os.path import join as path_join, dirname
+from datetime import timedelta
+
 
 from flask import Flask
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS, cross_origin
 
 from .hooks import apply_hooks
 
@@ -14,17 +17,32 @@ app = Flask(__name__,
             template_folder='templates',)
 
 
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['CORS_SUPPORTS_CREDENTIALS'] = True
+app.config['DEBUG'] = True #IS_DEBUG_ENVIRONMENT
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.20.0.3:3306/sourcesage_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.18.0.4:3306/sourcesage_db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@db:3306/sourcesage_db'
+
+# app.config['JWT_AUTH_URL_RULE'] = '/api/auth'
+# app.config['JWT_SECRET_KEY'] = 'TEST'
+# app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=3600*9)
+# app.config['JWT_AUTH_HEADER_PREFIX'] = 'Bearer'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SECURITY_PASSWORD_SALT'] = 'Holaholabento_olala'
+app.config['SECRET_KEY'] = 'TEST'
+
+CORS(app, supports_credentials=True)
+# cors = CORS(app, supports_credentials=True)
+# cors = CORS(app, resources=r'/api/*', headers='Content-Type')
+apply_hooks(app)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
 ma = Marshmallow(app)
 
 from .api import app_bp
 app.register_blueprint(app_bp, url_prefix='/api')
-apply_hooks(app)
+
 
 from app import views, models

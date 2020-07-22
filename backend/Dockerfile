@@ -10,6 +10,7 @@ RUN pip install --upgrade pip
 
 # RUN pip install -r requirements.txt 
 RUN set -e; \
+	apk update; \
 	apk add --no-cache --virtual .build-deps \
 		gcc \
 		libc-dev \
