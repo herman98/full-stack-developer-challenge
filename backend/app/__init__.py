@@ -24,17 +24,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.18.0.4:3306/sourcesage_db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@db:3306/sourcesage_db'
 
-# app.config['JWT_AUTH_URL_RULE'] = '/api/auth'
-# app.config['JWT_SECRET_KEY'] = 'TEST'
-# app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=3600*9)
-# app.config['JWT_AUTH_HEADER_PREFIX'] = 'Bearer'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.config['SECURITY_PASSWORD_SALT'] = 'Holaholabento_olala'
 app.config['SECRET_KEY'] = 'TEST'
 
 CORS(app, supports_credentials=True)
-# cors = CORS(app, supports_credentials=True)
-# cors = CORS(app, resources=r'/api/*', headers='Content-Type')
 apply_hooks(app)
 
 db = SQLAlchemy(app)

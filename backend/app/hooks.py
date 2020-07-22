@@ -3,7 +3,7 @@ ALLOWED_METHODS = '*' #'POST, GET, OPTIONS, PUT, DELETE'
 
 
 def add_cors_headers(response):
-    response.headers['Content-Type'] = 'application/json'
+    # response.headers['Content-Type'] = 'application/json'
     response.headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGIN
     response.headers['Access-Control-Allow-Methods'] = ALLOWED_METHODS
     # response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
