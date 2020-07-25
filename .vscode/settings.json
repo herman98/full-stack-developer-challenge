@@ -1,0 +1,16 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "files.exclude": {
+      "**/*.pyc": true
+    },
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/home/herman3g/.virtualenvs/sourcesage_flask/bin/python",
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true
+    },
+    "git.ignoreLimitWarning": true
+  }

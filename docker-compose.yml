@@ -1,0 +1,56 @@
+version: '3.4'
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'sourcesage_db'
+      MYSQL_USER: 'user_sourcesage'
+      MYSQL_PASSWORD: 'user_password'
+      MYSQL_ROOT_PASSWORD: 'root_password'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+    #   - my-db:/var/lib/mysql
+  backend:
+    build: ./backend
+    container_name: backend_flask
+    restart: always
+    environment:
+      - APP_NAME=BackendFlaskApp
+      - FLASK_ENV=development
+    # ports:
+    #   - 8080:8080
+    expose: 
+      - 8080
+    links:
+      - db
+    depends_on: 
+      - db
+    # command: 
+    #  - db_migrate.sh
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+  react-frontend:
+    container_name: react-frontend
+    restart: always
+    build: ./frontend
+    links:
+      - nginx
+    depends_on: 
+      - nginx
+    # volumes:
+    #   - '.:/app'
+    #   - '/app/node_modules'
+    ports:
+      - '8090:8090'
+    environment:
+      - NODE_ENV=development
+# volumes:
+#   my-db:

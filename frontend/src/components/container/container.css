@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 16px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  width: 700px;
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
