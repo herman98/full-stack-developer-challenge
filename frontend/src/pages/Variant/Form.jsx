@@ -1,19 +1,17 @@
-import React, { useState } from 'react'
-import 'antd/dist/antd.css'
-import { Form, Input, Button } from 'antd'
-import { AutoComplete } from 'antd'
-
-const options = [
-  {
-    value: 'Burns Bay Road',
-  },
-  {
-    value: 'Downing Street',
-  },
-  {
-    value: 'Wall Street',
-  },
-]
+import React, { useState, useEffect } from "react";
+import "antd/dist/antd.css";
+import { Form, Input, Button } from "antd";
+import { AutoComplete } from "antd";
+import { 
+  getProduct, 
+  getProductById 
+} from "../../API-services/product";
+import {
+  postVariant,
+  getVariantById,
+  updateVariant,
+} from "../../API-services/variant";
+import { successModal, errorModal } from "../../utilities/modal";
 
 const layout = {
   labelCol: {
@@ -22,42 +20,176 @@ const layout = {
   wrapperCol: {
     span: 8,
   },
-}
+};
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+
+
 const validateMessages = {
-  required: '${label} is required!',
-}
+  required: "${label} is required!",
+};
 
-const VariantForm = () => {
-  const [loading, setLoading] = useState(false)
+const VariantForm = (props) => {
+  let isMounted = true;
+  let variantId = props.match.params.variantId;
+  let [autoCompleteOption, setAutoCompleteOption] = useState([]);
+  let [productId, setProductId] = useState("");
+  let [product, setProduct] = useState("");
+  let [name, setName] = useState("");
+  let [size, setSize] = useState("");
+  let [color, setColor] = useState("");
+  let [loading, setLoading] = useState(false);
+  // const { register, handleSubmit, reset } = useForm();
 
-  const onFinish = (values) => {
-    console.log(values)
-  }
+  const [form, reset] = Form.useForm({
+    defaultValues: {
+      Name: '',
+      Size: '',
+      Color: '',
+    },
+  });
+  // let [description, setDescription] = useState('')
 
   const onSelect = (value, optionObject) => {
-    console.log(optionObject)
-  }
+    setProductId(optionObject.id);
+  };
 
-  const enterLoading = () => {
-    setLoading(true)
-  }
+  const onNameChange = (e) => {
+    setName(e.target.value);
+  };
 
-  setTimeout(() => {
-    setLoading(false)
-  }, 2000)
+  const onSizeChange = (e) => {
+    setSize(e.target.value);
+  };
+
+  const onColorChange = (e) => {
+    setColor(e.target.value);
+  };
+
+  const onSubmit = async () => {
+    if (isMounted) {
+      setLoading(true);
+    }
+
+    const payload = {
+      name,
+      size,
+      color,
+      product_id: productId,
+    };
+    try {
+      let response = {};
+
+      if (variantId) {
+        response = await updateVariant(productId, payload);
+      } else {
+        response = await postVariant(payload);
+      }
+      if (response.status === 200) {
+        successModal();
+      } else {
+        errorModal();
+      }
+    } catch (error) {
+      errorModal();
+      console.error(error);
+    }
+    if (isMounted) {
+      setLoading(false);
+    }
+    
+  };
+
+  const fetchProducts = async () => {
+    try {
+      let response = await getProduct(1, 100);
+      let result = [];
+      if (response.status === 200) {
+        result = response.data.data.products.map((product) => ({
+          id: product.id,
+          value: product.name,
+        }));
+        if (isMounted) {
+          setAutoCompleteOption(result);
+        }
+
+      } else {
+        console.error("fail to fetch products");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchProductbyID = async (productId) => {
+    try {
+      let response = await getProductById(productId);
+      let productData = response.data.data.product;
+      setProduct(productData.name);
+      form.setFieldsValue({
+        Product: productData.name
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchVariant = async (variantId) => {
+    try {
+      let response = await getVariantById(variantId);
+      fetchProductbyID(response.data.data.variant.product_id)
+
+      let variantData = response.data.data.variant;
+      if (variantId && isMounted) {
+        setName(variantData.name);
+        setSize(variantData.size);
+        setProductId(variantData.product_id);
+        setColor(variantData.color);
+
+        form.setFieldsValue({
+          Name: variantData.name,
+          Size: variantData.size,
+          Color: variantData.color,
+        });
+      } else {
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    if (variantId) {
+      fetchVariant(variantId);
+    }
+
+    return function cleanup() {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <>
       <h1>Variant Form</h1>
 
       <Form
-        {...layout}
+        {...formItemLayout}
+        form={form}
         name="nest-messages"
-        onFinish={onFinish}
         validateMessages={validateMessages}
       >
         <Form.Item
-          name={['user', 'product']}
+          name="Product"
           label="Product"
           rules={[
             {
@@ -69,9 +201,9 @@ const VariantForm = () => {
             style={{
               width: 200,
             }}
-            options={options}
+            options={autoCompleteOption}
             onSelect={onSelect}
-            placeholder="try to type `b`"
+            placeholder="Insert product name"
             filterOption={(inputValue, option) =>
               option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
               -1
@@ -79,7 +211,7 @@ const VariantForm = () => {
           />
         </Form.Item>
         <Form.Item
-          name={['user', 'name']}
+          name="Name"
           label="Name"
           rules={[
             {
@@ -87,56 +219,32 @@ const VariantForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input value={name} onChange={onNameChange} />
         </Form.Item>
         <Form.Item
-          name={['user', 'Image Url']}
-          label="Image Url"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name={['user', 'Size']}
+          name="Size"
           label="Size"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
+          rules={[]}
         >
-          <Input />
+          <Input value={size} onChange={onSizeChange} />
         </Form.Item>
         <Form.Item
-          name={['user', 'Color']}
+          name="Color"
           label="Color"
           rules={[
-            {
-              required: true,
-            },
-          ]}
+            ]}
         >
-          <Input />
+          <Input value={color} onChange={onColorChange} />
         </Form.Item>
-        <Form.Item name={['user', 'Description']} label="Description">
-          <Input.TextArea />
-        </Form.Item>
+       
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-          <Button
-            type="primary"
-            loading={loading}
-            onClick={() => enterLoading(0)}
-          >
+          <Button type="primary" loading={loading} onClick={onSubmit}>
             Submit
           </Button>
         </Form.Item>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default VariantForm
+export default VariantForm;
