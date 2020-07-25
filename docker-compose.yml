@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.4'
 services:
   db:
     image: mysql:5.7
@@ -37,5 +37,20 @@ services:
     restart: always
     ports:
       - "80:80"
+  react-frontend:
+    container_name: react-frontend
+    restart: always
+    build: ./frontend
+    links:
+      - nginx
+    depends_on: 
+      - nginx
+    # volumes:
+    #   - '.:/app'
+    #   - '/app/node_modules'
+    ports:
+      - '8090:8090'
+    environment:
+      - NODE_ENV=development
 # volumes:
 #   my-db:

@@ -1,11 +1,15 @@
-import React from 'react'
-import './image.css'
+import React from "react";
+import "./image.css";
 
 function Image(props) {
-
   return (
-    <div className="image"></div>
-  )
+    <img
+      src={props.imageUrl ? props.imageUrl : ""}
+      alt="image_logo"
+      className="image"
+      style={props.style}
+    ></img>
+  );
 }
 
-export default Image
+export default Image;

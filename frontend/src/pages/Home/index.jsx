@@ -15,12 +15,12 @@ function Home() {
         <Image src={react_img}/>
         <Title style={{ marginLeft: 10 }}>Product</Title>
         <div className="button-container">
-          <Link to="/variant/list">
+          <Link to="/product/list">
             <Button type="primary" danger>
               Detail
             </Button>
           </Link>
-          <Link to="/product/form">
+          <Link to="/product/insert">
             <Button style={{ marginLeft: 16 }} type="primary">
               Edit
             </Button>
@@ -36,7 +36,7 @@ function Home() {
               Detail
             </Button>
           </Link>
-          <Link to="/product/form">
+          <Link to="/variant/insert">
             <Button style={{ marginLeft: 16 }} type="warning">
               Edit
             </Button>
@@ -47,7 +47,7 @@ function Home() {
         <Image />
         <Title style={{ marginLeft: 10 }}>Images</Title>
         <div className="button-container">
-          <Link to="/variant/list">
+          <Link to="/image_logo/list">
             <Button type="primary" danger>
               Detail
             </Button>
