@@ -21,8 +21,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 app.config['DEBUG'] = True #IS_DEBUG_ENVIRONMENT
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.18.0.4:3306/sourcesage_db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@db:3306/sourcesage_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@172.18.0.4:3306/sourcesage_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root_password@db:3306/sourcesage_db'
 
 app.config['SECRET_KEY'] = 'TEST'
 

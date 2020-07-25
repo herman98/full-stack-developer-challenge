@@ -49,14 +49,15 @@ const VariantForm = (props) => {
   let [color, setColor] = useState("");
   let [loading, setLoading] = useState(false);
   // const { register, handleSubmit, reset } = useForm();
+  // {
+  //   defaultValues: {
+  //     Name: '',
+  //     Size: '',
+  //     Color: '',
+  //   },
+  // }
 
-  const [form, reset] = Form.useForm({
-    defaultValues: {
-      Name: '',
-      Size: '',
-      Color: '',
-    },
-  });
+  const [form] = Form.useForm();
   // let [description, setDescription] = useState('')
 
   const onSelect = (value, optionObject) => {
